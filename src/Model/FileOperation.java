@@ -227,7 +227,7 @@ JButton buttonInvoice;
                             String FILE_HEADER = "Invoice Date , Customer Name , invoice Number";
                             List<InvoiceHeader> invoices = new ArrayList<InvoiceHeader>();
                             invoices.add(new InvoiceHeader(invoiceDate, customerName, invoiceNum));
-                            FileWriter myObj = new FileWriter("InvoiceHeader.csv");
+                            FileWriter myObj = new FileWriter("scr\\ExcelForWrite\\InvoiceHeader.csv");
 
                             myObj.append(FILE_HEADER);
                             for (InvoiceHeader inv : invoices) {
@@ -290,7 +290,7 @@ JButton buttonInvoice;
                     String FILE_HEADER = "Item name  , Item Price , Item Price , Count , Total ,  Invoice Number  ";
                     List<InvoiceLine> invoices = new ArrayList<InvoiceLine>();
                     invoices.add(new InvoiceLine(itemName, itemPrice, count,total,invoiceNumber));
-                    FileWriter myObj = new FileWriter(" InvoiceLines.csv");
+                    FileWriter myObj = new FileWriter("scr\\ExcelForWrite\\InvoiceLines.csv");
 
                     myObj.append(FILE_HEADER);
                     for (InvoiceLine inv : invoices) {
