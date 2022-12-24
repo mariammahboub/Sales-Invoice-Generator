@@ -118,7 +118,7 @@ JButton buttonInvoice;
 
         if (e.getSource() == button) {
 
-            JOptionPane.showMessageDialog(null, "Choose Invoice Header excel And InvoiceLine excel");
+            JOptionPane.showMessageDialog(null, "Choose Invoice Header excel before InvoiceLine excel");
 
             JFileChooser fileChooser = new JFileChooser();
             try {
@@ -196,6 +196,7 @@ JButton buttonInvoice;
         }
         if (e.getSource() == button2) {
             Scanner sc = new Scanner(System.in);
+            JOptionPane.showMessageDialog(null, "Add Data From Console Please ");
             System.out.println("Input Date of Invoice Header 'dd/MM/YYYY' : ");
             String invDateField = sc.next();
             System.out.println("Input Customer Name of Invoice Header  : ");
@@ -258,6 +259,7 @@ JButton buttonInvoice;
 
             }}
             if (e.getSource() == button3) {
+                JOptionPane.showMessageDialog(null, "Add Data From Console Please ");
                 Scanner sc=new Scanner(System.in);
                 System.out.println("Input Item Name of Invoice Line : ");
 
