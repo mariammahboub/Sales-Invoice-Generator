@@ -241,7 +241,7 @@ JButton buttonInvoice;
                             }
                             myObj.flush();
                             myObj.close();
-                            JOptionPane.showMessageDialog(null, "Add Data Successfully \n save this excel ..! ! ");
+                            JOptionPane.showMessageDialog(null, "Add Data Successfully \n save this excel (InvoiceHeader.csv)  ..! ! ");
 
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(null, " Wrong file format", "Error", JOptionPane.ERROR_MESSAGE);
@@ -310,7 +310,7 @@ JButton buttonInvoice;
                     }
                     myObj.flush();
                     myObj.close();
-                    JOptionPane.showMessageDialog(null, "Add Data Successfully \n save this excel ..! ! ");
+                    JOptionPane.showMessageDialog(null, "Add Data Successfully \n save this excel (InvoiceLines.csv) ..! ! ");
 
                 }catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, " Wrong file format", "Error", JOptionPane.ERROR_MESSAGE);
