@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
-public class InvoiceHeader  extends AbstractTableModel  {
-    private String[] colums = {"No. ", "Data", "Customer", "Total"};
+public class InvoiceHeader   {
 
     private ArrayList<InvoiceHeader> invoiceHeaders;
 
@@ -95,7 +94,7 @@ public class InvoiceHeader  extends AbstractTableModel  {
     }
     @Override
     public String toString() {
-        return "InvoiceHeader{" + "invoiceNum=" + invoiceNum + ", invoiceDate=" + invoiceDate + ", customerName=" + customerName + '}';
+        return " \n InvoiceHeader{ \n " + " invoiceNum : " + invoiceNum + " \n , invoiceDate= " + invoiceDate + " \n, customerName= " + customerName + '}';
     }
     public String getAsCSV() {
         return invoiceNum + "," + invoiceDate + "," + customerName;
@@ -103,19 +102,7 @@ public class InvoiceHeader  extends AbstractTableModel  {
 
 
 
-    @Override
-    public int getRowCount() {
-        return invoiceHeaders.size();
-    }
-    @Override
-    public int getColumnCount() {
-        return colums.length;
-    }
-    @Override
-    public String getColumnName(int column) {
-        return colums[column];
-    }
-    @Override
+
     public Object getValueAt(int rowIndex, int columnIndex) {
         InvoiceHeader invoiceHeader = invoiceHeaders.get(rowIndex);
         switch (columnIndex) {
