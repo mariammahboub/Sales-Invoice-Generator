@@ -14,10 +14,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.EventObject;
 import java.util.List;
 import java.util.Scanner;
 
-public class FileOperation extends JFrame  implements ActionListener {
+public class FileOperation extends JFrame{
 
     private int invoiceNum;
 
@@ -88,179 +89,160 @@ public class FileOperation extends JFrame  implements ActionListener {
         this.invoiceHeader = invoiceHeader;
     }
 
-    JButton button;
-    JButton button2;
-    JButton button3;
-    JButton button4;
-JButton buttonInvoice;
 
     public FileOperation() {
-        button = new JButton("Read Date");
-        button.addActionListener(this);
-        this.add(button);
-        button2 = new JButton("Write Date Invoice Header ");
-        button2.addActionListener(this);
-        this.add(button2);
-        button3= new JButton("Write Date Invoice Line  Item");
-        button3.addActionListener(this);
-        this.add(button3);
-        setSize(500, 400);
-        setLocation(500, 200);
-        this.pack();
-        this.setVisible(true);
-        this.setLayout(new FlowLayout());
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-    }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+        System.out.println("If you need read data click 1 \n" +
+                "If you add data invoice header click 2 \n" +
+                "If you add data invoice Line click 3 ");
+System.out.print("Choose what you need : ");
 
-        if (e.getSource() == button) {
-
-            JOptionPane.showMessageDialog(null, "Choose Invoice Header excel before InvoiceLine excel");
-
-            JFileChooser fileChooser = new JFileChooser();
-            try {
-                int result = fileChooser.showOpenDialog(null);
-                if (result == JFileChooser.APPROVE_OPTION) {
-                    File headerFile = fileChooser.getSelectedFile();
-                    Path headerPath = Paths.get(headerFile.getAbsolutePath());
-                    List<String> headerLines = Files.readAllLines(headerPath);
-                    //---------- check read date -----------------
-                    ArrayList<InvoiceHeader> invoiceHeaderArray = new ArrayList<>();
-                    for (String headerLine : headerLines) {
-                        try {
-                            String[] partsInvoice = headerLine.split(",");
-                            int invoiceNum = Integer.parseInt(partsInvoice[0]);
-                            String invoiceDate = partsInvoice[1];
-                            String customerName = partsInvoice[2];
-                            InvoiceHeader invoiceHeader = new InvoiceHeader(invoiceNum, invoiceDate, customerName);
-                            invoiceHeaderArray.add(invoiceHeader);
-                            System.out.println("excel file chooser in invoice header: " + invoiceHeaderArray);
-
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                            JOptionPane.showMessageDialog(null, "Folder/File path is not found",
-                                    "Error", JOptionPane.ERROR_MESSAGE);
-                        }
-                    }
-
-                    result = fileChooser.showOpenDialog(null);
+            Scanner input = new Scanner(System.in);
+            int x = input.nextInt();
+            if ( x== 1 ) {
+                JOptionPane.showMessageDialog(null, "Choose Invoice Header excel before InvoiceLine excel");
+                JFileChooser fileChooser = new JFileChooser();
+                try {
+                    int result = fileChooser.showOpenDialog(null);
                     if (result == JFileChooser.APPROVE_OPTION) {
-                        File lineFile = fileChooser.getSelectedFile();
-                        Path linePath = Paths.get(lineFile.getAbsolutePath());
-                        List<String> lineLines = Files.readAllLines(linePath);
-                        //---------read file Invoice Line(invoiceNumber,itemName,itemPrice,count)
-                        System.out.println("Invoice Line check read");
-                        for (String lineLine : lineLines) {
-                            Scanner myObj = new Scanner(System.in);
-
-
+                        File headerFile = fileChooser.getSelectedFile();
+                        Path headerPath = Paths.get(headerFile.getAbsolutePath());
+                        List<String> headerLines = Files.readAllLines(headerPath);
+                        //---------- check read date -----------------
+                        ArrayList<InvoiceHeader> invoiceHeaderArray = new ArrayList<>();
+                        for (String headerLine : headerLines) {
                             try {
-
-
-                                String[] partsLine = lineLine.split(",");
-                                int invoiceNum = Integer.parseInt(partsLine[0]);
-
-                                String itemName = partsLine[1];
-                                double itemPrice = Double.parseDouble(partsLine[2]);
-
-                                int count = Integer.parseInt(partsLine[3]);
-                                InvoiceHeader invoiceLoops = null;
-                                for (InvoiceHeader invoiceHeader : invoiceHeaderArray) {
-                                    if (invoiceHeader.getInvoiceNum() == invoiceNum) {
-                                        invoiceLoops = invoiceHeader;
-
-                                        break;
-
-                                    }
-                                }
-                                InvoiceLine invoiceLine = new InvoiceLine(itemName, itemPrice, count, invoiceLoops);
-                                invoiceLoops.getInvoiceLines().add(invoiceLine);
-                                System.out.println("excel file chooser in invoice line: " + invoiceLoops + invoiceLine);
-                                break;
+                                String[] partsInvoice = headerLine.split("\n");
+                                int invoiceNum = Integer.parseInt(partsInvoice[0]);
+                                String invoiceDate = partsInvoice[1];
+                                String customerName = partsInvoice[2];
+                                InvoiceHeader invoiceHeader = new InvoiceHeader(invoiceNum, invoiceDate, customerName);
+                                invoiceHeaderArray.add(invoiceHeader);
 
                             } catch (Exception ex) {
                                 ex.printStackTrace();
-                                JOptionPane.showMessageDialog(null, "Folder/File path is not found", "Error", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Folder/File path is not found",
+                                        "Error", JOptionPane.ERROR_MESSAGE);
+                            }
+
+                        }
+                        System.out.println("excel file chooser in invoice header: " + invoiceHeaderArray);
+
+                        result = fileChooser.showOpenDialog(null);
+                        if (result == JFileChooser.APPROVE_OPTION) {
+                            File lineFile = fileChooser.getSelectedFile();
+                            Path linePath = Paths.get(lineFile.getAbsolutePath());
+                            List<String> lineLines = Files.readAllLines(linePath);
+                            //---------read file Invoice Line(invoiceNumber,itemName,itemPrice,count)
+                            System.out.println("Invoice Line check read");
+                            for (String lineLine : lineLines) {
+                                Scanner myObj = new Scanner(System.in);
+
+
+                                try {
+
+
+                                    String[] partsLine = lineLine.split("\n");
+                                    int invoiceNum = Integer.parseInt(partsLine[0]);
+
+                                    String itemName = partsLine[1];
+                                    double itemPrice = Double.parseDouble(partsLine[2]);
+
+                                    int count = Integer.parseInt(partsLine[3]);
+                                    InvoiceHeader invoiceLoops = null;
+                                    for (InvoiceHeader invoiceHeader : invoiceHeaderArray) {
+                                        if (invoiceHeader.getInvoiceNum() == invoiceNum) {
+                                            invoiceLoops = invoiceHeader;
+
+                                            break;
+
+                                        }
+                                    }
+                                    InvoiceLine invoiceLine = new InvoiceLine(itemName, itemPrice, count, invoiceLoops);
+                                    invoiceLoops.getInvoiceLines().add(invoiceLine);
+                                    System.out.println("excel file chooser in invoice line: " + invoiceLoops + invoiceLine);
+                                    break;
+
+                                } catch (Exception ex) {
+                                    ex.printStackTrace();
+                                    JOptionPane.showMessageDialog(null, "Folder/File path is not found", "Error", JOptionPane.ERROR_MESSAGE);
+                                }
                             }
                         }
                     }
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Wrong file format", "Error", JOptionPane.ERROR_MESSAGE);
+
                 }
-
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Wrong file format", "Error", JOptionPane.ERROR_MESSAGE);
-
-            }
-        }
-        if (e.getSource() == button2) {
-            Scanner sc = new Scanner(System.in);
-            JOptionPane.showMessageDialog(null, "Add Data From Console Please ");
-            System.out.println("Input Date of Invoice Header 'dd/MM/YYYY' : ");
-            String invDateField = sc.next();
-            System.out.println("Input Customer Name of Invoice Header  : ");
-            String custNameField = sc.next();
-            System.out.println("Input Id invoice Number of Invoice Header : ");
-            int invoiceNum = sc.nextInt();
-            String invoiceDate = invDateField;
-            String customerName = custNameField;
-            String newInvoice = "\n Invoice Header new : [{ invoiceNum = " + invoiceNum + " - " + " , customerName = " + customerName +
-                    " , " + "invoicedate = " + invoiceDate + " }] .";
-            try {
-                String[] dateParts = invoiceDate.split("/");
-                if (dateParts.length < 3) {
-                    JOptionPane.showMessageDialog(null, "Wrong date  format", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    int day = Integer.parseInt(dateParts[0]);
-                    int month = Integer.parseInt(dateParts[1]);
-                    int year = Integer.parseInt(dateParts[2]);
-                    if (day > 31 || month > 12) {
-                        JOptionPane.showMessageDialog(null, "Wrong date format", "Error", JOptionPane.ERROR_MESSAGE);
-                    } else {
-                        InvoiceHeader invoiceHeader = new InvoiceHeader(invoiceNum, invoiceDate, customerName);
-                        JOptionPane.showMessageDialog(null, "Add Data Successfully ..! ! ");
-                        System.out.println(newInvoice);
-                        String invoice = invoiceDate + " " + " " + customerName + " " + invoiceNum;
-                        try {
-                            String COMMA = " , ";
-                            String NEWLINE = "\n";
-                            String FILE_HEADER = "Invoice Date , Customer Name , invoice Number";
-                            List<InvoiceHeader> invoices = new ArrayList<InvoiceHeader>();
-                            invoices.add(new InvoiceHeader(invoiceDate, customerName, invoiceNum));
-                            FileWriter myObj = new FileWriter("src\\ExcelForWrite\\InvoiceHeader.csv");
-
-                            myObj.append(FILE_HEADER);
-                            for (InvoiceHeader inv : invoices) {
-                                myObj.append(NEWLINE);
-                                myObj.append(invoiceDate);
-                                myObj.append(COMMA);
-                                myObj.append(customerName);
-                                myObj.append(COMMA);
-
-                                myObj.append(String.valueOf(invoiceNum));
-                            }
-                            myObj.flush();
-                            myObj.close();
-                            JOptionPane.showMessageDialog(null, "Add Data Successfully \n save this excel (InvoiceHeader.csv)  ..! ! ");
-
-                        } catch (Exception ex) {
-                            JOptionPane.showMessageDialog(null, " Wrong file format", "Error", JOptionPane.ERROR_MESSAGE);
-
-                        }
-
-
-                    }
-                }
-
-
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Wrong file format ", "Error", JOptionPane.ERROR_MESSAGE);
-
-            }}
-            if (e.getSource() == button3) {
+            } else if (x == 2) {
+                Scanner sc = new Scanner(System.in);
                 JOptionPane.showMessageDialog(null, "Add Data From Console Please ");
-                Scanner sc=new Scanner(System.in);
+                System.out.println("Input Date of Invoice Header 'dd/MM/YYYY' : ");
+                String invDateField = sc.next();
+                System.out.println("Input Customer Name of Invoice Header  : ");
+                String custNameField = sc.next();
+                System.out.println("Input Id invoice Number of Invoice Header : ");
+                int invoiceNum = sc.nextInt();
+                String invoiceDate = invDateField;
+                String customerName = custNameField;
+                String newInvoice = "\n Invoice Header new : [{ invoiceNum = " + invoiceNum + " - " + " , customerName = " + customerName +
+                        " , " + "invoicedate = " + invoiceDate + " }] .";
+                try {
+                    String[] dateParts = invoiceDate.split("/");
+                    if (dateParts.length < 3) {
+                        JOptionPane.showMessageDialog(null, "Wrong date  format", "Error", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        int day = Integer.parseInt(dateParts[0]);
+                        int month = Integer.parseInt(dateParts[1]);
+                        int year = Integer.parseInt(dateParts[2]);
+                        if (day > 31 || month > 12) {
+                            JOptionPane.showMessageDialog(null, "Wrong date format", "Error", JOptionPane.ERROR_MESSAGE);
+                        } else {
+                            InvoiceHeader invoiceHeader = new InvoiceHeader(invoiceNum, invoiceDate, customerName);
+                            JOptionPane.showMessageDialog(null, "Add Data Successfully ..! ! ");
+                            System.out.println(newInvoice);
+                            String invoice = invoiceDate + " " + " " + customerName + " " + invoiceNum;
+                            try {
+                                String COMMA = " , ";
+                                String NEWLINE = "\n";
+                                String FILE_HEADER = "Invoice Date , Customer Name , invoice Number";
+                                List<InvoiceHeader> invoices = new ArrayList<InvoiceHeader>();
+                                invoices.add(new InvoiceHeader(invoiceDate, customerName, invoiceNum));
+                                FileWriter myObj = new FileWriter("src\\ExcelForWrite\\InvoiceHeader.csv");
+
+                                myObj.append(FILE_HEADER);
+                                for (InvoiceHeader inv : invoices) {
+                                    myObj.append(NEWLINE);
+                                    myObj.append(invoiceDate);
+                                    myObj.append(COMMA);
+                                    myObj.append(customerName);
+                                    myObj.append(COMMA);
+
+                                    myObj.append(String.valueOf(invoiceNum));
+                                }
+                                myObj.flush();
+                                myObj.close();
+                                JOptionPane.showMessageDialog(null, "Add Data Successfully \n save this excel (InvoiceHeader.csv)  ..! ! ");
+
+                            } catch (Exception ex) {
+                                JOptionPane.showMessageDialog(null, " Wrong file format", "Error", JOptionPane.ERROR_MESSAGE);
+
+                            }
+
+
+                        }
+                    }
+
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Wrong file format ", "Error", JOptionPane.ERROR_MESSAGE);
+
+                }
+            } else if (x == 3) {
+                JOptionPane.showMessageDialog(null, "Add Data From Console Please ");
+                Scanner sc = new Scanner(System.in);
                 System.out.println("Input Item Name of Invoice Line : ");
 
                 String itemNameField = sc.next();
@@ -278,20 +260,20 @@ JButton buttonInvoice;
                 String priceShow = String.valueOf(itemPriceField);
                 int count = Integer.parseInt(countShow);
                 double itemPrice = Double.parseDouble(priceShow);
-                double total=itemPrice*count;
-                InvoiceLine invoiceLine = new InvoiceLine(itemName, itemPrice, count, total,invoiceNumber);
+                double total = itemPrice * count;
+                InvoiceLine invoiceLine = new InvoiceLine(itemName, itemPrice, count, total, invoiceNumber);
 
                 JOptionPane.showMessageDialog(null, "Add Data Successfully ..! ! ");
 
                 System.out.println("New Invoice Item : { Item name = " + itemName + " , Item Price = " + itemPrice + " , Count = " + count + " , Total = , "
                         + itemPrice * count + "  , Invoice Number = " + invoiceNumber + " }");
-                String    invoice=itemName+" "+" "+itemPrice+" "+count+" "+total +" "+invoiceNumber;
+                String invoice = itemName + " " + " " + itemPrice + " " + count + " " + total + " " + invoiceNumber;
                 try {
                     String COMMA = " , ";
                     String NEWLINE = "\n";
                     String FILE_HEADER = "Item name  , Item Price , Item Price , Count , Total ,  Invoice Number  ";
                     List<InvoiceLine> invoices = new ArrayList<InvoiceLine>();
-                    invoices.add(new InvoiceLine(itemName, itemPrice, count,total,invoiceNumber));
+                    invoices.add(new InvoiceLine(itemName, itemPrice, count, total, invoiceNumber));
                     FileWriter myObj = new FileWriter("src\\ExcelForWrite\\InvoiceLines.csv");
 
                     myObj.append(FILE_HEADER);
@@ -314,12 +296,18 @@ JButton buttonInvoice;
                     myObj.close();
                     JOptionPane.showMessageDialog(null, "Add Data Successfully \n save this excel (InvoiceLines.csv) ..! ! ");
 
-                }catch (Exception ex) {
+                } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, " Wrong file format", "Error", JOptionPane.ERROR_MESSAGE);
 
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, " Wrong file format", "Error", JOptionPane.ERROR_MESSAGE);
+
             }
 
 
+        }
 
-        }}
+
+    }
+
