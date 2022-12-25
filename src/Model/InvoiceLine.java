@@ -81,7 +81,7 @@ private double total;
     }
     @Override
     public String toString() {
-        return " Invoice Line { " + " \nInvoice Num : " + invoiceHeader.getInvoiceNum() + "\nitem Name : " + itemName + " \n item Price=" + itemPrice + " \ncount : " + count + '}';
+        return "\nInvoice Line { " + " \nInvoice Num : " + invoiceHeader.getInvoiceNum() + "\nitem Name : " + itemName + " \n item Price=" + itemPrice + " \ncount : " + count + '}';
     }
     public String getAsCSV() {
         return invoiceHeader.getInvoiceNum() + "," + itemName + "," + itemPrice + "," + count;
