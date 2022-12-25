@@ -84,7 +84,8 @@ public class FileOperation extends JFrame{
 
         System.out.println("If you need read data click 1 \n" +
                 "If you add data invoice header click 2 \n" +
-                "If you add data invoice Line click 3 ");
+                "If you add data invoice Line click 3 \n" +
+                "If you need exit click 4 ");
         System.out.print("Choose what you need : ");
 
         Scanner input = new Scanner(System.in);
@@ -125,15 +126,11 @@ public class FileOperation extends JFrame{
                         File lineFile = fileChooser.getSelectedFile();
                         Path linePath = Paths.get(lineFile.getAbsolutePath());
                         List<String> lineLines = Files.readAllLines(linePath);
-                        //---------read file Invoice Line(invoiceNumber,itemName,itemPrice,count)
+                        //---------read file Invoice Line(invoiceNumber,itemName,itemPrice,count)----
                         System.out.println("Invoice Line check read");
                         for (String lineLine : lineLines) {
                             Scanner myObj = new Scanner(System.in);
-
-
                             try {
-
-
                                 String[] partsLine = lineLine.split(",");
                                 int invoiceNum = Integer.parseInt(partsLine[0]);
 
@@ -291,7 +288,11 @@ public class FileOperation extends JFrame{
                 JOptionPane.showMessageDialog(null, " Wrong file format", "Error", JOptionPane.ERROR_MESSAGE);
 
             }
-        } else {
+        } else if (x==4){
+            JOptionPane.showMessageDialog(null, " Exits Project ", "Error", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+        else {
             JOptionPane.showMessageDialog(null, " Wrong file format", "Error", JOptionPane.ERROR_MESSAGE);
 
         }
@@ -301,4 +302,3 @@ public class FileOperation extends JFrame{
 
 
 }
-
