@@ -145,7 +145,7 @@ System.out.print("Choose what you need : ");
                                 try {
 
 
-                                    String[] partsLine = lineLine.split("\n");
+                                    String[] partsLine = lineLine.split(",");
                                     int invoiceNum = Integer.parseInt(partsLine[0]);
 
                                     String itemName = partsLine[1];
