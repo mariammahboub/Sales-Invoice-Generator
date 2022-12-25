@@ -3,7 +3,6 @@ import View.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import java.util.ArrayList;
-import javax.swing.table.AbstractTableModel;
 public class InvoiceHeader   {
 
     private ArrayList<InvoiceHeader> invoiceHeaders;
@@ -94,7 +93,7 @@ public class InvoiceHeader   {
     }
     @Override
     public String toString() {
-        return " \n InvoiceHeader{ \n " + " invoiceNum : " + invoiceNum + " \n , invoiceDate= " + invoiceDate + " \n, customerName= " + customerName + '}';
+        return "InvoiceHeader { \n " + "invoiceNum : " + invoiceNum + "\ninvoiceDate : " + invoiceDate + "\ncustomerName : " + customerName + '}';
     }
     public String getAsCSV() {
         return invoiceNum + "," + invoiceDate + "," + customerName;
