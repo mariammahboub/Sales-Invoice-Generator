@@ -93,7 +93,7 @@ public class InvoiceHeader   {
     }
     @Override
     public String toString() {
-        return "InvoiceHeader { \n " + "invoiceNum : " + invoiceNum + "\ninvoiceDate : " + invoiceDate + "\ncustomerName : " + customerName + '}';
+        return "\nInvoiceHeader { \n " + "invoiceNum : " + invoiceNum + "\ninvoiceDate : " + invoiceDate + "\ncustomerName : " + customerName + '}';
     }
     public String getAsCSV() {
         return invoiceNum + "," + invoiceDate + "," + customerName;
