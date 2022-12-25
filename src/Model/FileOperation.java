@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -198,7 +199,7 @@ public class FileOperation extends JFrame{
                             String FILE_HEADER = "Invoice Date , Customer Name , invoice Number";
                             List<InvoiceHeader> invoices = new ArrayList<InvoiceHeader>();
                             invoices.add(new InvoiceHeader(invoiceDate, customerName, invoiceNum));
-                            FileWriter myObj = new FileWriter("InvoiceHeader.csv");
+                            FileWriter myObj = new FileWriter("InvoiceHeader.csv",true);
 
                             myObj.append(FILE_HEADER);
                             for (InvoiceHeader inv : invoices) {
