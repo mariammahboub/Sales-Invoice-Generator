@@ -128,7 +128,7 @@ System.out.print("Choose what you need : ");
                             }
 
                         }
-                        System.out.println("excel file chooser in invoice header: " + invoiceHeaderArray);
+                        System.out.println("excel file chooser in invoice header: \n " + invoiceHeaderArray);
 
 
                         result = fileChooser.showOpenDialog(null);
@@ -163,7 +163,7 @@ System.out.print("Choose what you need : ");
                                     }
                                     InvoiceLine invoiceLine = new InvoiceLine(itemName, itemPrice, count, invoiceLoops);
                                     invoiceLoops.getInvoiceLines().add(invoiceLine);
-                                    System.out.println("excel file chooser in invoice line: " + invoiceLoops + invoiceLine);
+                                    System.out.println("excel file chooser in invoice line: \n " + invoiceLoops + invoiceLine);
                                     break;
 
                                 } catch (Exception ex) {
@@ -189,8 +189,8 @@ System.out.print("Choose what you need : ");
                 int invoiceNum = sc.nextInt();
                 String invoiceDate = invDateField;
                 String customerName = custNameField;
-                String newInvoice = "\n Invoice Header new : [{ invoiceNum = " + invoiceNum + " - " + " , customerName = " + customerName +
-                        " , " + "invoicedate = " + invoiceDate + " }] .";
+                String newInvoice = "\n Invoice Header new : [{ invoiceNum = " + invoiceNum + " \n  - " + " , customerName = " + customerName +
+                        " \n , " + "invoicedate = " + invoiceDate + " }] .";
                 try {
                     String[] dateParts = invoiceDate.split("/");
                     if (dateParts.length < 3) {
@@ -267,8 +267,8 @@ System.out.print("Choose what you need : ");
 
                 JOptionPane.showMessageDialog(null, "Add Data Successfully ..! ! ");
 
-                System.out.println("New Invoice Item : { Item name = " + itemName + " , Item Price = " + itemPrice + " , Count = " + count + " , Total = , "
-                        + itemPrice * count + "  , Invoice Number = " + invoiceNumber + " }");
+                System.out.println("New Invoice Item : { Item name = " + itemName + " \n , Item Price = " + itemPrice + " \n , Count = " + count + " \n , Total = , "
+                        + itemPrice * count + " \n  , Invoice Number = " + invoiceNumber + " }");
                 String invoice = itemName + " " + " " + itemPrice + " " + count + " " + total + " " + invoiceNumber;
                 try {
                     String COMMA = " , ";
