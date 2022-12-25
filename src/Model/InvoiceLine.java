@@ -1,7 +1,6 @@
 package Model;
 import java.util.ArrayList;
-import javax.swing.table.AbstractTableModel;
-public class InvoiceLine extends AbstractTableModel{
+public class InvoiceLine {
     private int invoiceNumber;
 private double total;
     public InvoiceLine(String itemName, double itemPrice, int count, double total, int invoiceNumber) {
@@ -43,7 +42,6 @@ private double total;
         return invoiceNumber;
     }
 
-    private String[] colums={"No .","Item Name","Item Price","Count","Total"};
     private double itemPrice;
     private int count;
     private InvoiceHeader invoiceHeader;
@@ -83,7 +81,7 @@ private double total;
     }
     @Override
     public String toString() {
-        return " \n Invoice Line{" + " \n InvoiceNum= " + invoiceHeader.getInvoiceNum() + " \n , itemName= " + itemName + " \n , itemPrice=" + itemPrice + " \n , count=" + count + '}';
+        return " Invoice Line { " + " \nInvoice Num : " + invoiceHeader.getInvoiceNum() + "\nitem Name : " + itemName + " \n item Price=" + itemPrice + " \ncount : " + count + '}';
     }
     public String getAsCSV() {
         return invoiceHeader.getInvoiceNum() + "," + itemName + "," + itemPrice + "," + count;
@@ -96,18 +94,6 @@ private double total;
     public ArrayList<InvoiceLine> getInvoiceLines() {
         return invoiceLines;
     }
-    @Override
-    public int getRowCount() {
-        return invoiceLines.size();
-    }
-    @Override
-    public int getColumnCount() {
-        return colums.length;
-    }
-    public String getColumnName(int x) {
-        return colums[x];
-    }
-    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         InvoiceLine invoiceLine=invoiceLines.get(rowIndex);
         switch(columnIndex){
