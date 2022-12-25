@@ -198,7 +198,7 @@ public class FileOperation extends JFrame{
                             String FILE_HEADER = "Invoice Date , Customer Name , invoice Number";
                             List<InvoiceHeader> invoices = new ArrayList<InvoiceHeader>();
                             invoices.add(new InvoiceHeader(invoiceDate, customerName, invoiceNum));
-                            FileWriter myObj = new FileWriter("InvoiceHeader.csv",true);
+                            FileWriter myObj = new FileWriter("InvoiceHeader.csv");
 
                             myObj.append(FILE_HEADER);
                             for (InvoiceHeader inv : invoices) {
@@ -242,28 +242,27 @@ public class FileOperation extends JFrame{
 
             int itemPriceField = sc.nextInt();
             System.out.println("Input Invoice Num of Invoice Line : ");
-            int invoiceNumber = sc.nextInt();
+            int num = sc.nextInt();
             String itemName = itemNameField;
             String countShow = itemCountField;
             String priceShow = String.valueOf(itemPriceField);
             int count = Integer.parseInt(countShow);
             double itemPrice = Double.parseDouble(priceShow);
             double total = itemPrice * count;
-            InvoiceLine invoiceLine = new InvoiceLine(itemName, itemPrice, count, total, invoiceNumber);
+            InvoiceLine invoiceLine = new InvoiceLine(itemName, itemPrice, count, total, num);
 
             JOptionPane.showMessageDialog(null, "Add Data Successfully ..! ! ");
 
             System.out.println("New Invoice Item : { Item name = " + itemName + " \n , Item Price = " + itemPrice + " \n , Count = " + count + " \n , Total = , "
-                    + itemPrice * count + " \n  , Invoice Number = " + invoiceNumber + " }");
-            String invoice = itemName + " " + " " + itemPrice + " " + count + " " + total + " " + invoiceNumber;
+                    + itemPrice * count + " \n  , Invoice Number = " + num + " }");
+            String invoice = itemName + " " + " " + itemPrice + " " + count + " " + total + " " + num;
             try {
                 String COMMA = " , ";
                 String NEWLINE = "\n";
                 String FILE_HEADER = "Item name  , Item Price , Item Price , Count , Total ,  Invoice Number  ";
                 List<InvoiceLine> invoices = new ArrayList<InvoiceLine>();
-                invoices.add(new InvoiceLine(itemName, itemPrice, count, total, invoiceNumber));
+                invoices.add(new InvoiceLine(itemName, itemPrice, count, total, num));
                 FileWriter myObj = new FileWriter("InvoiceLines.csv",true);
-
                 myObj.append(FILE_HEADER);
                 for (InvoiceLine inv : invoices) {
                     myObj.append(NEWLINE);
@@ -275,7 +274,7 @@ public class FileOperation extends JFrame{
                     myObj.append(COMMA);
                     myObj.append(String.valueOf(total));
                     myObj.append(COMMA);
-                    myObj.append(String.valueOf(invoiceNumber));
+                    myObj.append(String.valueOf(num));
                     myObj.append(COMMA);
 
                     myObj.append(String.valueOf(invoiceNum));
@@ -298,7 +297,9 @@ public class FileOperation extends JFrame{
         }
 
 
+
     }
 
 
 }
+
