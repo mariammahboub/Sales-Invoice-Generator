@@ -101,7 +101,7 @@ System.out.print("Choose what you need : ");
             Scanner input = new Scanner(System.in);
             int x = input.nextInt();
             if ( x== 1 ) {
-                JOptionPane.showMessageDialog(null, "Choose Invoice Header excel before InvoiceLine excel");
+                JOptionPane.showMessageDialog(null, "Choose File invoiceHeader.csv or invoiceLine.csv");
                 JFileChooser fileChooser = new JFileChooser();
                 try {
                     int result = fileChooser.showOpenDialog(null);
