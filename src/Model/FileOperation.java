@@ -34,7 +34,6 @@ public class FileOperation extends JFrame{
     }
 
     private InvoiceHeader invoiceHeader;
-    private Test test;
     private InvoiceHeader invoiceViewField;
     private InvoiceLine lineViewField;
     private InvoiceLine invoiceLine;
@@ -49,13 +48,6 @@ public class FileOperation extends JFrame{
         return invoiceHeaders;
     }
 
-    public Controller.Test getTest() {
-        return test;
-    }
-
-    public void setTest(Controller.Test test) {
-        this.test = test;
-    }
 
     public InvoiceHeader getInvoiceViewField() {
         return invoiceViewField;
@@ -312,5 +304,4 @@ public class FileOperation extends JFrame{
 
 
 }
-
 
