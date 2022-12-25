@@ -12,6 +12,7 @@ private double total;
         this.invoiceNumber=invoiceNumber;
     }
 
+
     public InvoiceLine getItemNameField() {
         return itemNameField;
     }
@@ -82,7 +83,7 @@ private double total;
     }
     @Override
     public String toString() {
-        return "Invoice Line{" + "InvoiceNum=" + invoiceHeader.getInvoiceNum() + ", itemName=" + itemName + ", itemPrice=" + itemPrice + ", count=" + count + '}';
+        return " \n Invoice Line{" + " \n InvoiceNum= " + invoiceHeader.getInvoiceNum() + " \n , itemName= " + itemName + " \n , itemPrice=" + itemPrice + " \n , count=" + count + '}';
     }
     public String getAsCSV() {
         return invoiceHeader.getInvoiceNum() + "," + itemName + "," + itemPrice + "," + count;
