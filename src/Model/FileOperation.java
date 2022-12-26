@@ -92,7 +92,7 @@ public class FileOperation extends JFrame{
         Scanner input = new Scanner(System.in);
         int x = input.nextInt();
         if ( x== 1 ) {
-            JOptionPane.showMessageDialog(null, "Choose File invoiceHeader.csv or invoiceLine.csv");
+            JOptionPane.showMessageDialog(null, "Choose File");
             JFileChooser fileChooser = new JFileChooser();
             try {
                 int result = fileChooser.showOpenDialog(null);
