@@ -200,11 +200,12 @@ public class FileOperation extends JFrame{
                             List<InvoiceHeader> invoices = new ArrayList<InvoiceHeader>();
                             invoices.add(new InvoiceHeader(invoiceDate, customerName, invoiceNum));
                             FileWriter myObj = new FileWriter("InvoiceHeader.csv",true);
+                               myObj.append(NEWLINE);
 
+                            myObj.append(FILE_HEADER);
                         
                             for (InvoiceHeader inv : invoices) {
-                                     myObj.append(NEWLINE);
-                    myObj.append(FILE_HEADER);
+                       
                                 myObj.append(NEWLINE);
                                 myObj.append(invoiceDate);
                                 myObj.append(COMMA);
@@ -266,10 +267,11 @@ public class FileOperation extends JFrame{
                 List<InvoiceLine> invoices = new ArrayList<InvoiceLine>();
                 invoices.add(new InvoiceLine(itemName, itemPrice, count, total, num));
                 FileWriter myObj = new FileWriter("InvoiceLines.csv",true);
-               
+                      myObj.append(NEWLINE);
+
+                            myObj.append(FILE_HEADER);
                 for (InvoiceLine inv : invoices) {
-                         myObj.append(NEWLINE);
-                    myObj.append(FILE_HEADER);
+                   
                     myObj.append(NEWLINE);
                     myObj.append(itemName);
                     myObj.append(COMMA);
